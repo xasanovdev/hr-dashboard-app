@@ -1,0 +1,38 @@
+/* styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Your custom styles go here */
+body,html {
+  width: 100%;
+  height: 100%;
+}
+
+/* write for settings class animation infinity */
+
+.settings {
+  animation: settings 5s infinite;
+}
+.settings:hover {
+  cursor: pointer;
+  animation: settings 1s infinite;
+}
+
+@keyframes settings {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+canvas {
+  width: 100px;
+  height: 100px;
+}
+
+

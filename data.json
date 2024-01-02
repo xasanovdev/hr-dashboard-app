@@ -1,0 +1,28 @@
+{
+  "employees": [
+    {
+      "id": 1,
+      "fullName": "John Doe",
+      "department": "accounting",
+      "position": "Accountant",
+      "gender": "male",
+      "dateOfBirth": "1990-05-15"
+    },
+    {
+      "id": 2,
+      "fullName": "Jane Smith",
+      "department": "IT",
+      "position": "Software Engineer",
+      "gender": "female",
+      "dateOfBirth": "1988-12-10"
+    },
+    {
+      "id": 3,
+      "fullName": "Bob Johnson",
+      "department": "marketing",
+      "position": "Marketing Specialist",
+      "gender": "male",
+      "dateOfBirth": "1995-08-25"
+    }
+  ]
+}

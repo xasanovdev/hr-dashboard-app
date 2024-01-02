@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HR Management System | Home Page</title>
+
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+
+    <!-- Example using CDN (replace with your Tailwind CSS version) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="w-full h-[100vh]">
+      <div class="h-full w-full flex items-center">
+        <header
+          class="w-[50px] h-full p-4 bg-black text-white flex items-center justify-between flex-col"
+        >
+          <div>
+            <a href="./dashboard-page.html"
+              ><i class="fa-solid fa-users-gear text-[20px]"></i
+            ></a>
+          </div>
+          <nav>
+            <!-- there should be 4 links button -->
+            <ul class="flex flex-col gap-4">
+              <li>
+                <a
+                  class="hover:text-slate-400 duration-200"
+                  href="./pages/dashboard-page.html"
+                  ><i class="fa-solid fa-user-plus"></i
+                ></a>
+              </li>
+              <li>
+                <a href="./pages/dashboard-page.html"
+                  ><i class="fa-solid fa-users"></i
+                ></a>
+              </li>
+            </ul>
+          </nav>
+          <div class="relative">
+            <i class="fa-solid fa-gear settings"></i>
+          </div>
+        </header>
+        <main class="p-4 flex-1 h-full">
+          <div class="">
+            <div>
+              <h1 class="text-xl md:text-2xl font-semibold">
+                List candidates of your business
+              </h1>
+              <p class="text-[12px] text-slate-500">
+                Control and analyze your data in the easiest way
+              </p>
+            </div>
+
+            <div class="mt-6" id="employeeList">
+              <div
+                class="flex justify-between items-center gap-4"
+              >
+                <div class="relative rounded-md overflow-hidden flex-1">
+                  <input
+                    type="text"
+                    class="border w-full border-gray-300 pl-4 pr-24 py-2 focus:outline-none focus:ring-2 focus:ring-black duration-200"
+                    placeholder="Search"
+                  />
+                  <button
+                    class="bg-black hover:bg-zinc-800 text-white p-2 absolute right-0 h-full duration-200"
+                    id=""
+                    type="submit"
+                  >
+                    <span class="flex items-center gap-2 justify-center">
+                      <span>Search</span>
+                      <i class="fa-solid fa-search"></i>
+                    </span>
+                  </button>
+                </div>
+              </div>
+
+              
+              <div class="mt-4">
+                <table class="w-full">
+                  <thead>
+                    <tr class="text-left">
+                      <th class="px-4 py-2">Name</th>
+                      <th class="px-4 py-2">Email</th>
+                      <th class="px-4 py-2">Phone</th>
+                      <th class="px-4 py-2">Status</th>
+                      <th class="px-4 py-2">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="px-4 py-2">John Doe</td>
+                      <td class="px-4 py-2"></td>
+                      <td class="px-4 py-2"></td>
+                      <td class="px-4 py-2"></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script src="../index.js"></script>
+  </body>
+</html>
