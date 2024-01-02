@@ -39,6 +39,14 @@
       "position": "Financial Analyst",
       "gender": "male",
       "dateOfBirth": "1994-09-05"
+    },
+    {
+      "fullName": "Ibrohim Xasanov",
+      "position": "Student",
+      "department": "IT",
+      "gender": "male",
+      "dateOfBirth": "2024-01-01",
+      "id": 6
     }
   ]
 }

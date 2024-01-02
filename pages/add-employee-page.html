@@ -61,10 +61,124 @@
               Control and analyze your data in the easiest way
             </p>
           </div>
+          <form class="mt-12 sm:h-[60%] max-w-[768px] mx-auto">
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-12">
+              <li>
+                <label class="block text-sm font-medium text-slate-700"
+                  >Full Name
+                  <input
+                    class="border mt-2 w-full border-gray-300 pl-4 px-4 py-2 focus:outline-none focus:ring-2 rounded-md focus:ring-black duration-200"
+                    type="text"
+                    name="employee"
+                    id="fullName"
+                  />
+                </label>
+              </li>
+              <li>
+                <label class="block text-sm font-medium text-slate-700"
+                  >Position
+                  <input
+                    class="border mt-2 w-full border-gray-300 pl-4 px-4 py-2 focus:outline-none focus:ring-2 rounded-md focus:ring-black duration-200"
+                    type="text"
+                    name="employee"
+                    id="position"
+                  />
+                </label>
+              </li>
+              <li class="flex flex-col text-sm font-medium text-slate-700">
+                <span class="text-sm font-medium text-slate-700"
+                  >Department</span
+                >
+                <ul class="flex gap-4 py-2 flex-wrap">
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="department"
+                      id="accounting"
+                      value="accounting"
+                      class="filter-checkbox"
+                      checked
+                    />
+                    <span>Accounting</span>
+                  </label>
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="department"
+                      id="informationTechnology"
+                      value="IT"
+                      class="filter-checkbox"
+                    />
+                    <span>Information Technology</span>
+                  </label>
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="department"
+                      id="marketing"
+                      value="marketing"
+                      class="filter-checkbox"
+                    />
+                    <span>Marketing</span>
+                  </label>
+                </ul>
+              </li>
+              <li class="flex flex-col text-sm font-medium text-slate-700">
+                <span class="text-sm font-medium text-slate-700">Gender</span>
+                <ul class="flex gap-4 py-2 flex-wrap">
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="male"
+                      value="male"
+                      class="filter-checkbox"
+                      checked
+                    />
+                    <span>Male</span>
+                  </label>
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="gender"
+                      id="female"
+                      value="Female"
+                      class="filter-checkbox"
+                    />
+                    <span>Female</span>
+                  </label>
+                </ul>
+              </li>
+              <li>
+                <label class="block text-sm font-medium text-slate-700"
+                  >Date of Birth
+                  <input
+                    class="border mt-2 w-full border-gray-300 pl-4 px-4 py-2 focus:outline-none focus:ring-2 rounded-md focus:ring-black duration-200"
+                    type="date"
+                    name="employee"
+                    id="dateOfBirth"
+                    onchange="validateDateOfBirth(this)"
+                  />
+                </label>
+                <span id="dateError" class="text-red-600 font-semibold"></span>
+              </li>
+            </ul>
+            <button
+              class="bg-black w-full mt-4 hover:bg-zinc-800 text-white px-4 py-2 rounded-md duration-200"
+              id="addEmployeeButton"
+            >
+              Create New Candidate
+            </button>
+            <p
+              class="errorMessage bg-red-300 hidden w-full mt-4 text-red-600 text-center px-4 py-2 rounded-md"
+            >
+              Fill All Inputs
+            </p>
+          </form>
         </main>
       </div>
     </div>
 
-    <script src="../index.js"></script>
+    <script src="../js/employeeAdd.js"></script>
   </body>
 </html>
