@@ -20,7 +20,7 @@
     />
   </head>
   <body>
-    <div class="w-full h-[100vh]">
+    <div class="w-full h-full overflow-y-hidden">
       <div class="h-full w-full flex items-center">
         <header
           class="w-[50px] h-full p-4 bg-black text-white flex items-center justify-between flex-col"
@@ -51,7 +51,7 @@
             <i class="fa-solid fa-gear settings"></i>
           </div>
         </header>
-        <main class="p-4 flex-1 h-full">
+        <main class="p-4 flex-1 h-full overflow-y-auto">
           <div class="">
             <div>
               <h1 class="text-xl md:text-2xl font-semibold">
@@ -62,19 +62,22 @@
               </p>
             </div>
 
-            <div class="mt-6" id="employeeList">
-              <div
-                class="flex justify-between items-center gap-4"
-              >
-                <div class="relative rounded-md overflow-hidden flex-1">
+            <div class="mt-6">
+              <div class="flex justify-between flex-col items-center gap-4">
+                <h2 class="text-xl text-left w-full font-semibold">
+                  Search candidates
+                </h2>
+
+                <div class="relative rounded-md overflow-hidden w-full">
                   <input
                     type="text"
+                    id="searchCandidate"
                     class="border w-full border-gray-300 pl-4 pr-24 py-2 focus:outline-none focus:ring-2 focus:ring-black duration-200"
                     placeholder="Search"
                   />
                   <button
                     class="bg-black hover:bg-zinc-800 text-white p-2 absolute right-0 h-full duration-200"
-                    id=""
+                    id="searchCandidateButton"
                     type="submit"
                   >
                     <span class="flex items-center gap-2 justify-center">
@@ -83,29 +86,109 @@
                     </span>
                   </button>
                 </div>
+
+                <h2 class="text-xl text-left w-full font-mono">
+                  Filter candidates
+                </h2>
+                <div
+                  class="relative flex w-full flex-col gap-4 left-4"
+                  id="countryForm"
+                >
+                  <div>
+                    <span class="font-bold">By Department:</span>
+                    <ul class="flex gap-4 mt-2 flex-wrap">
+                      <label class="select-item">
+                        <span>Accounting</span>
+                        <input
+                          type="checkbox"
+                          name="department"
+                          id="accounting"
+                          value="accounting"
+                          class="filter-checkbox"
+                        />
+                      </label>
+                      <label class="select-item">
+                        <span>Information Technology</span>
+                        <input
+                          type="checkbox"
+                          name="department"
+                          id="informationTechnology"
+                          value="IT"
+                          class="filter-checkbox"
+                        />
+                      </label>
+                      <label class="select-item">
+                        <span>Marketing</span>
+                        <input
+                          type="checkbox"
+                          name="department"
+                          id="marketing"
+                          value="marketing"
+                          class="filter-checkbox"
+                        />
+                      </label>
+                    </ul>
+                  </div>
+                  <div>
+                    <span class="font-bold">By Gender:</span>
+                    <ul class="flex gap-4 mt-2 flex-wrap">
+                      <label class="select-item">
+                        <span>Male</span>
+                        <input
+                          type="checkbox"
+                          name="gender"
+                          id="male"
+                          value="male"
+                          class="filter-checkbox"
+                        />
+                      </label>
+                      <label class="select-item">
+                        <span>Female</span>
+                        <input
+                          type="checkbox"
+                          name="gender"
+                          id="female"
+                          value="female"
+                          class="filter-checkbox"
+                        />
+                      </label>
+                    </ul>
+                  </div>
+                </div>
               </div>
 
-              
               <div class="mt-4">
                 <table class="w-full">
-                  <thead>
+                  <thead class="bg-zinc-300">
                     <tr class="text-left">
-                      <th class="px-4 py-2">Name</th>
-                      <th class="px-4 py-2">Email</th>
-                      <th class="px-4 py-2">Phone</th>
-                      <th class="px-4 py-2">Status</th>
-                      <th class="px-4 py-2">Action</th>
+                      <th class="px-4 py-2">Full Name</th>
+                      <th class="px-4 py-2">Department</th>
+                      <th class="px-4 py-2">Position</th>
+                      <th class="px-4 py-2">Gender</th>
+                      <th class="px-4 py-2">Date Of Birth</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="px-4 py-2">John Doe</td>
-                      <td class="px-4 py-2"></td>
-                      <td class="px-4 py-2"></td>
-                      <td class="px-4 py-2"></td>
-                    </tr>
-                  </tbody>
+                  <tbody id="employeeList" class="bg-zinc-100"></tbody>
+                  <div id="loader" class="loader"></div>
                 </table>
+                <div
+                  id="paginationControls"
+                  class="mt-4 flex justify-between items-center"
+                >
+                  <button
+                    class="bg-black hover:bg-zinc-800 text-white px-4 py-2 rounded-md duration-200"
+                    onclick="prevPage()"
+                  >
+                    Prev
+                  </button>
+                  <div id="pageButtons" class="flex gap-2"></div>
+                  <button
+                    class="bg-black hover:bg-zinc-800 text-white px-4 py-2 rounded-md duration-200"
+                    onclick="nextPage()"
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -113,6 +196,7 @@
       </div>
     </div>
 
-    <script src="../index.js"></script>
+    <script async type="module" src="/utils/utils.js"></script>
+    <script async type="module" src="../js/employeeList.js"></script>
   </body>
 </html>
