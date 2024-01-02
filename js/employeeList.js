@@ -35,6 +35,23 @@ const fetchUsers = {
     }
     return response.json();
   },
+
+  // Add PUT method to the fetchUsers object
+  async put(endpoint, id, data) {
+    const response = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error updating data at ${endpoint}`);
+    }
+
+    return response.json();
+  },
 };
 
 const checkboxes = document.querySelectorAll('.filter-checkbox');
@@ -73,7 +90,6 @@ function queryBuilder() {
     .filter(Boolean)
     .join('&')}`;
 
-  
   window.history.pushState({ path: newUrl }, '', newUrl);
 
   return [departmentQuery, genderQuery, paginationQuery]
@@ -138,12 +154,18 @@ function generateEmployeeList(employees) {
   const html = paginatedData
     .map(
       (employee) => `
-    <tr onclick="console.log('click =${employee.id}')" class="hover:bg-zinc-200 active:bg-zinc-300 duration-200 cursor-pointer">
+    <tr>
       <td class="px-4 py-2 whitespace-nowrap">${employee.fullName}</td>
       <td class="px-4 py-2 whitespace-nowrap">${employee.department}</td>
       <td class="px-4 py-2 whitespace-nowrap">${employee.position}</td>
       <td class="px-4 py-2 whitespace-nowrap">${employee.gender}</td>
       <td class="px-4 py-2 whitespace-nowrap">${employee.dateOfBirth}</td>
+      <td class="px-4 py-2 whitespace-nowrap flex items-center justify-center">
+        <button 
+          onclick="editUser(${employee.id})"
+          class="w-full bg-black hover:bg-zinc-800 text-white px-4 py-2 rounded-md duration-200"
+        >View</button>
+      </td>
     </tr>
   `
     )
@@ -153,6 +175,125 @@ function generateEmployeeList(employees) {
 
   // Add pagination controls
   addPaginationControls(employees);
+}
+let user = null;
+function editUser(id) {
+  console.log(id);
+  user = data.find((user) => user.id === id);
+
+  console.log(user);
+
+  openModal(user);
+}
+window.editUser = editUser;
+
+function openModal(user) {
+  // Assuming you have an editModal element
+  const editModal = document.querySelector('#editModal');
+
+  // Use the user data to populate the modal fields (replace these with actual field IDs)
+  document.getElementById('fullName').value = user.fullName;
+  document.getElementById('position').value = user.position;
+  // Set department radio button
+  document.querySelector(
+    `input[name="edit-department"][value="${user.department}"]`
+  ).checked = true;
+  // Set gender radio button
+  document.querySelector(
+    `input[name="edit-gender"][value="${user.gender}"]`
+  ).checked = true;
+  // Set dateOfBirth
+  document.getElementById('dateOfBirth').value = user.dateOfBirth;
+
+  // Remove 'hidden' class to show the modal
+  editModal.classList.remove('hidden');
+  editModal.classList.add('flex');
+}
+const addEmployeeButton = document.querySelector('#addEmployeeButton');
+
+addEmployeeButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  saveChanges();
+});
+// Function to save changes
+function saveChanges() {
+  // Get updated values from modal fields
+  const updatedFullName = document.getElementById('fullName').value;
+  const updatedPosition = document.getElementById('position').value;
+  const updatedDepartment = document.querySelector(
+    'input[name="edit-department"]:checked'
+  ).value;
+  const updatedGender = document.querySelector(
+    'input[name="edit-gender"]:checked'
+  ).value;
+  const updatedDateOfBirth = document.getElementById('dateOfBirth').value;
+
+  // Update the user data (replace this with actual data structure)
+  const updatedUser = {
+    id: user.id,
+    fullName: updatedFullName,
+    position: updatedPosition,
+    department: updatedDepartment,
+    gender: updatedGender,
+    dateOfBirth: updatedDateOfBirth,
+  };
+
+  try {
+    fetchUsers.put('employees', user.id, updatedUser);
+
+    updateUserData(updatedUser);
+
+    closeEditModal();
+  } catch (error) {
+    console.error('Error updating user:', error.message);
+  }
+
+  closeEditModal();
+}
+
+document.body.addEventListener('click', (e) => {
+  if (e.target.id === 'editModal') {
+    closeEditModal();
+    user = null;
+  }
+});
+// Function to close the modal
+function closeEditModal() {
+  const editModal = document.querySelector('#editModal');
+
+  editModal.classList.add('hidden');
+  editModal.classList.remove('flex');
+}
+
+// Assuming you have a function to update the user data in your array
+function updateUserData(updatedUser) {
+  console.log(updatedUser);
+  // Find the user in the data array and update the values
+  const userIndex = data.findIndex((user) => user.id === updatedUser.id);
+  if (userIndex !== -1) {
+    data[userIndex] = { ...data[userIndex], ...updatedUser };
+
+    console.log('User updated:', data[userIndex]);
+  } else {
+    console.error('User not found for updating.');
+  }
+}
+
+const deleteUserButton = document.querySelector('#deleteUserButton');
+
+deleteUserButton.addEventListener('click', (e) => {
+  e.preventDefault();
+
+  deleteUser();
+});
+
+function deleteUser() {
+  try {
+    fetchUsers.delete('employees', user.id);
+  } catch (error) {
+    console.error('Error deleting user:', error.message);
+  }
 }
 
 function addPaginationControls(employees) {

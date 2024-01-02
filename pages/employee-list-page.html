@@ -76,7 +76,7 @@
                     placeholder="Search"
                   />
                   <button
-                    class="bg-black hover:bg-zinc-800 text-white p-2 absolute right-0 h-full duration-200"
+                    class="bg-black hover:bg-zinc-800 text-white py-2 px-4 absolute right-0 h-full duration-200"
                     id="searchCandidateButton"
                     type="submit"
                   >
@@ -98,7 +98,6 @@
                     <span class="font-bold">By Department:</span>
                     <ul class="flex gap-4 mt-2 flex-wrap">
                       <label class="select-item">
-                        <span>Accounting</span>
                         <input
                           type="checkbox"
                           name="department"
@@ -106,9 +105,9 @@
                           value="accounting"
                           class="filter-checkbox"
                         />
+                        <span>Accounting</span>
                       </label>
                       <label class="select-item">
-                        <span>Information Technology</span>
                         <input
                           type="checkbox"
                           name="department"
@@ -116,9 +115,9 @@
                           value="IT"
                           class="filter-checkbox"
                         />
+                        <span>Information Technology</span>
                       </label>
                       <label class="select-item">
-                        <span>Marketing</span>
                         <input
                           type="checkbox"
                           name="department"
@@ -126,6 +125,7 @@
                           value="marketing"
                           class="filter-checkbox"
                         />
+                        <span>Marketing</span>
                       </label>
                     </ul>
                   </div>
@@ -133,7 +133,6 @@
                     <span class="font-bold">By Gender:</span>
                     <ul class="flex gap-4 mt-2 flex-wrap">
                       <label class="select-item">
-                        <span>Male</span>
                         <input
                           type="checkbox"
                           name="gender"
@@ -141,9 +140,9 @@
                           value="male"
                           class="filter-checkbox"
                         />
+                        <span>Male</span>
                       </label>
                       <label class="select-item">
-                        <span>Female</span>
                         <input
                           type="checkbox"
                           name="gender"
@@ -151,13 +150,14 @@
                           value="female"
                           class="filter-checkbox"
                         />
+                        <span>Female</span>
                       </label>
                     </ul>
                   </div>
                 </div>
               </div>
 
-              <div class="mt-4">
+              <div class="mt-4 overflow-x-auto">
                 <table class="w-full">
                   <thead class="bg-zinc-300">
                     <tr class="text-left">
@@ -166,6 +166,7 @@
                       <th class="px-4 py-2">Position</th>
                       <th class="px-4 py-2">Gender</th>
                       <th class="px-4 py-2">Date Of Birth</th>
+                      <th class="px-4 py-2">View Buttons</th>
                     </tr>
                   </thead>
                   <tbody id="employeeList" class="bg-zinc-100"></tbody>
@@ -193,6 +194,136 @@
             </div>
           </div>
         </main>
+      </div>
+    </div>
+
+    <div
+      class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 hidden justify-center items-center"
+      id="editModal"
+    >
+      <div
+        class="bg-white mx-4 rounded-md max-h-[85vh] overflow-y-auto p-4 w-full max-w-[500px]"
+      >
+        <div class="flex justify-between items-center">
+          <h2 class="text-xl font-semibold">Edit Candidate</h2>
+          <button
+            class="bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-md duration-200"
+            id="deleteUserButton"
+          >
+            Delete
+          </button>
+        </div>
+        <div class="mt-4">
+          <form class="mt-12 sm:h-[60%] max-w-[768px] mx-auto">
+            <ul class="grid grid-cols-1 gap-4">
+              <li>
+                <label class="block text-sm font-medium text-slate-700"
+                  >Full Name
+                  <input
+                    class="border mt-2 w-full border-gray-300 pl-4 px-4 py-2 focus:outline-none focus:ring-2 rounded-md focus:ring-black duration-200"
+                    type="text"
+                    name="edit-employee"
+                    id="fullName"
+                  />
+                </label>
+              </li>
+              <li>
+                <label class="block text-sm font-medium text-slate-700"
+                  >Position
+                  <input
+                    class="border mt-2 w-full border-gray-300 pl-4 px-4 py-2 focus:outline-none focus:ring-2 rounded-md focus:ring-black duration-200"
+                    type="text"
+                    name="edit-employee"
+                    id="position"
+                  />
+                </label>
+              </li>
+              <li class="flex flex-col text-sm font-medium text-slate-700">
+                <span class="text-sm font-medium text-slate-700"
+                  >Department</span
+                >
+                <ul class="flex gap-4 py-2 flex-wrap">
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="edit-department"
+                      id="accounting"
+                      value="accounting"
+                      checked
+                    />
+                    <span>Accounting</span>
+                  </label>
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="edit-department"
+                      id="informationTechnology"
+                      value="IT"
+                    />
+                    <span>Information Technology</span>
+                  </label>
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="edit-department"
+                      id="marketing"
+                      value="marketing"
+                    />
+                    <span>Marketing</span>
+                  </label>
+                </ul>
+              </li>
+              <li class="flex flex-col text-sm font-medium text-slate-700">
+                <span class="text-sm font-medium text-slate-700">Gender</span>
+                <ul class="flex gap-4 py-2 flex-wrap">
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="edit-gender"
+                      id="male"
+                      value="male"
+                      checked
+                    />
+                    <span>Male</span>
+                  </label>
+                  <label class="select-item">
+                    <input
+                      type="radio"
+                      name="edit-gender"
+                      id="female"
+                      value="female"
+                    />
+                    <span>Female</span>
+                  </label>
+                </ul>
+              </li>
+              <li>
+                <label class="block text-sm font-medium text-slate-700"
+                  >Date of Birth
+                  <input
+                    class="border mt-2 w-full border-gray-300 pl-4 px-4 py-2 focus:outline-none focus:ring-2 rounded-md focus:ring-black duration-200"
+                    type="date"
+                    name="edit-employee"
+                    id="dateOfBirth"
+                    onchange="validateDateOfBirth(this)"
+                  />
+                </label>
+                <span id="dateError" class="text-red-600 font-semibold"></span>
+              </li>
+            </ul>
+            <button
+              class="bg-black w-full mt-4 hover:bg-zinc-800 text-white px-4 py-2 rounded-md duration-200"
+              id="addEmployeeButton"
+            >
+              Edit Selected Candidate
+            </button>
+            <p
+              class="errorMessage bg-red-300 hidden w-full mt-4 text-red-600 text-center px-4 py-2 rounded-md"
+            >
+              Fill All Inputs
+            </p>
+          </form>
+        </div>
       </div>
     </div>
 
