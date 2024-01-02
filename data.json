@@ -23,6 +23,22 @@
       "position": "Marketing Specialist",
       "gender": "male",
       "dateOfBirth": "1995-08-25"
+    },
+    {
+      "id": 4,
+      "fullName": "Alice Brown",
+      "department": "IT",
+      "position": "Systems Analyst",
+      "gender": "female",
+      "dateOfBirth": "1992-03-18"
+    },
+    {
+      "id": 5,
+      "fullName": "Charlie Davis",
+      "department": "accounting",
+      "position": "Financial Analyst",
+      "gender": "male",
+      "dateOfBirth": "1994-09-05"
     }
   ]
 }
