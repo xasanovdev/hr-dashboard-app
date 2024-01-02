@@ -9,18 +9,18 @@ settingsIcon.addEventListener('click', () => {
 // Your data
 const maleCount = 30;
 const femaleCount = 50;
-const others = 2;
 
 // Create a pie chart
+
 const gender = document.getElementById('genderChart').getContext('2d');
 const genderChart = new Chart(gender, {
   type: 'pie',
   data: {
-    labels: ['Male', 'Female',"Othersssssss"],
+    labels: ['Male', 'Female'],
     datasets: [
       {
-        data: [maleCount, femaleCount,others],
-        backgroundColor: ['#E21A1A', '#509ADB','#9228aa'],
+        data: [maleCount, femaleCount],
+        backgroundColor: ['#E21A1A', '#509ADB'],
       },
     ],
   },
@@ -45,5 +45,4 @@ const departmentsChart = new Chart(departments, {
     ],
   },
 });
-
 
