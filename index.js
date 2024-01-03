@@ -1,3 +1,42 @@
+// index.js
+const BASE_URL = 'http://localhost:3000';
+
+const fetchUsers = {
+  async get(endpoint) {
+    const response = await fetch(`${BASE_URL}/${endpoint}`);
+    if (!response.ok) {
+      throw new Error(`Error fetching data from ${endpoint}`);
+    }
+    return response.json();
+  },
+
+  async post(endpoint, data) {
+    const response = await fetch(`${BASE_URL}/${endpoint}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    if (!response.ok) {
+      throw new Error(`Error posting data to ${endpoint}`);
+    }
+    return response.json();
+  },
+
+  async delete(endpoint, id) {
+    const response = await fetch(`${BASE_URL}/${endpoint}/${id}`, {
+      method: 'DELETE',
+    });
+    if (!response.ok) {
+      throw new Error(`Error deleting data from ${endpoint}`);
+    }
+    return response.json();
+  },
+};
+
+export default fetchUsers;
+
 const settingsIcon = document.querySelector('.settings');
 const settingsModal = document.querySelector('.settings-modal');
 
@@ -7,8 +46,61 @@ settingsIcon.addEventListener('click', () => {
 });
 
 // Your data
-const maleCount = 30;
-const femaleCount = 50;
+const data = await fetchUsers.get('employees');
+
+// Update gender counts
+const maleCountElement = document.getElementById('maleCount');
+const femaleCountElement = document.getElementById('femaleCount');
+const maleCount = data.filter((user) => user.gender === 'male').length;
+const femaleCount = data.filter((user) => user.gender === 'female').length;
+maleCountElement.textContent = maleCount;
+femaleCountElement.textContent = femaleCount;
+
+// Update department counts
+const accountingCountElement = document.getElementById('accountingCount');
+const marketingCountElement = document.getElementById('marketingCount');
+const ITCountElement = document.getElementById('ITCount');
+const accountingCount = data.filter(
+  (user) => user.department === 'accounting'
+).length;
+const marketingCount = data.filter(
+  (user) => user.department === 'marketing'
+).length;
+const ITCount = data.filter((user) => user.department === 'IT').length;
+accountingCountElement.textContent = accountingCount;
+marketingCountElement.textContent = marketingCount;
+ITCountElement.textContent = ITCount;
+
+const departments = data.map((employee) => employee.department);
+const departmentCounts = {};
+
+departments.forEach((department) => {
+  departmentCounts[department] = (departmentCounts[department] || 0) + 1;
+});
+
+const ctx = document.getElementById('departmentChart').getContext('2d');
+const departmentChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: Object.keys(departmentCounts),
+    datasets: [
+      {
+        label: 'Employee Counts by Department',
+        data: Object.values(departmentCounts),
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        borderColor: 'rgba(0, 0, 0, 0.7)',
+        borderWidth: 4,
+      },
+    ],
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true,
+      },
+    },
+  },
+});
 
 // Create a pie chart
 
@@ -20,29 +112,8 @@ const genderChart = new Chart(gender, {
     datasets: [
       {
         data: [maleCount, femaleCount],
-        backgroundColor: ['#E21A1A', '#509ADB'],
+        backgroundColor: ['#444', '#888'],
       },
     ],
   },
 });
-
-// Your data
-const accounting = 30;
-const IT = 50;
-const marketing = 50;
-const departments = document
-  .getElementById('departmentsChart')
-  .getContext('2d');
-const departmentsChart = new Chart(departments, {
-  type: 'pie',
-  data: {
-    labels: ['Accounting', 'IT', 'Marketing'],
-    datasets: [
-      {
-        data: [accounting, IT, marketing],
-        backgroundColor: ['#9228aa', 'yellow', '#2ecc71'],
-      },
-    ],
-  },
-});
-

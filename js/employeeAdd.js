@@ -122,7 +122,7 @@ async function createNewEmployee(e) {
 function displayAddedUserName() {
   if (addedUserName) {
 
-    addedUserNameElement.textContent = `Candidate "${deletedUserName}" added`;
+    addedUserNameElement.textContent = `Candidate "${addedUserName}" added`;
 
     addedUserNameElement.classList.remove('hidden');
     // Display the added user's name on the page for 1000ms

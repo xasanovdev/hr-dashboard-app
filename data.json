@@ -41,12 +41,12 @@
       "dateOfBirth": "1994-09-05"
     },
     {
+      "id": 6,
       "fullName": "Ibrohim Xasanov",
-      "position": "Student",
+      "position": "Ibrohim Xasanov",
       "department": "IT",
       "gender": "male",
-      "dateOfBirth": "2024-01-01",
-      "id": 6
+      "dateOfBirth": "2024-02-01"
     }
   ]
 }

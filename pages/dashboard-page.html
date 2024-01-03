@@ -62,29 +62,90 @@
                   Control and analyze your data in the easiest way
                 </p>
               </div>
-              <div class="grid grid-cols-2 gap-4 mt-4">
-                <a
-                  href="./employee-list-page.html"
-                  class="bg-black p-4 rounded-3xl h-[200px]"
-                >
-                  <h3 class="text-white">Male users:</h3>
-                  <p class="text-white font-extrabold text-xl">124</p>
-                </a>
-                <a
-                  href="./employee-list-page.html"
-                  class="bg-black p-4 rounded-3xl h-[200px]"
-                >
-                  <h3 class="text-white">Male users:</h3>
-                  <p class="text-white font-extrabold text-xl">123</p>
-                </a>
-              </div>
-            </div>
-            <div class="flex flex-col">
-              <div class="w-[300px] h-[300px]">
-                <canvas id="genderChart" class=""></canvas>
-              </div>
-              <div class="w-[300px] h-[300px]">
-                <canvas id="departmentsChart" class=""></canvas>
+
+              <div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
+                  <div class="h-[300px] hidden self-center items-center justify-center md:flex">
+                    <canvas id="genderChart" class="self-center items-center"></canvas>
+                  </div>
+                  <a
+                    href="./employee-list-page.html"
+                    class="relative bg-black flex overflow-hidden flex-col h-[300px] justify-between items-start p-4 rounded-3xl bg-gradient-to-r from-zinc-950 to-zinc-600"
+                  >
+                    <i
+                      class="absolute text-[160px] -right-2 -bottom-2 fa-solid fa-person"
+                    ></i>
+                    <h3 class="text-white text-xl">Male users:</h3>
+                    <p
+                      id="maleCount"
+                      class="text-white font-extrabold text-3xl"
+                    >
+                      124
+                    </p>
+                  </a>
+                  <a
+                    href="./employee-list-page.html"
+                    class="relative bg-black flex overflow-hidden flex-col h-[300px] justify-between items-start p-4 rounded-3xl bg-gradient-to-r from-zinc-950 to-zinc-600"
+                  >
+                    <i
+                      class="absolute text-[160px] -right-2 -bottom-2 fa-solid fa-person-dress"
+                    ></i>
+                    <h3 class="text-white text-xl">Female users:</h3>
+                    <p
+                      id="femaleCount"
+                      class="text-white font-extrabold text-3xl"
+                    >
+                      124
+                    </p>
+                  </a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                  <a
+                    href="./employee-list-page.html"
+                    class="relative bg-black flex overflow-hidden flex-col h-[300px] justify-between items-start p-4 rounded-3xl bg-gradient-to-r from-zinc-950 to-zinc-600"
+                  >
+                    <i
+                      class="absolute text-[160px] -right-2 -bottom-2 fa-solid fa-calculator"
+                    ></i>
+                    <h3 class="text-white text-xl">Accounting Department:</h3>
+                    <p
+                      id="accountingCount"
+                      class="text-white font-extrabold text-3xl"
+                    >
+                      124
+                    </p>
+                  </a>
+                  <a
+                    href="./employee-list-page.html"
+                    class="relative bg-black flex overflow-hidden flex-col h-[300px] justify-between items-start p-4 rounded-3xl bg-gradient-to-r from-zinc-950 to-zinc-600"
+                  >
+                    <i
+                      class="absolute text-[160px] -right-2 -bottom-2 fa-solid fa-magnifying-glass-dollar"
+                    ></i>
+                    <h3 class="text-white text-xl">Marketing Department:</h3>
+                    <p
+                      id="marketingCount"
+                      class="text-white font-extrabold text-3xl"
+                    >
+                      124
+                    </p>
+                  </a>
+                  <a
+                    href="./employee-list-page.html"
+                    class="relative bg-black col-span-2 lg:col-span-1 flex overflow-hidden flex-col h-[300px] justify-between items-start p-4 rounded-3xl bg-gradient-to-r from-zinc-950 to-zinc-600"
+                  >
+                    <i
+                      class="absolute text-[160px] -right-2 -bottom-2 fa-solid fa-computer"
+                    ></i>
+                    <h3 class="text-white text-xl">IT Department:</h3>
+                    <p id="ITCount" class="text-white font-extrabold text-3xl">
+                      124
+                    </p>
+                  </a>
+                  <div class="w-full h-full md:col-span-2 lg:col-span-3">
+                    <canvas id="departmentChart" class="w-full h-full"></canvas>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -92,6 +153,7 @@
       </div>
     </div>
 
-    <script src="../index.js"></script>
+    <script type="module" src="../index.js"></script>
+    <script type="module" src="../utils/utils.js"></script>
   </body>
 </html>
