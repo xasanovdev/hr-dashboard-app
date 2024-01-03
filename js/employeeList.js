@@ -100,6 +100,7 @@ let data = null;
 
 const loader = document.querySelector('#loader');
 
+// Call the displayDeletedUserName function within the fetchDataAndRender function
 async function fetchDataAndRender() {
   try {
     // Show loader while fetching data
@@ -111,6 +112,9 @@ async function fetchDataAndRender() {
     data = await fetchUsers.get('employees', queryBuilder());
     paginationControls.style.display = data.length > 10 ? '' : 'none';
     generateEmployeeList(data);
+
+    // Display the deleted user's name
+    displayDeletedUserName();
   } catch (error) {
     console.error('Error fetching data:', error);
   } finally {
@@ -151,9 +155,18 @@ function generateEmployeeList(employees) {
   const endIndex = startIndex + itemsPerPage;
   const paginatedData = employees.slice(startIndex, endIndex);
 
-  const html = paginatedData
-    .map(
-      (employee) => `
+  let html = '';
+
+  if (employees.length === 0) {
+    html = `<td colspan="6" class="text-center h-32">
+      <h2 class="text-2xl text-gray-500">No candidates found</h2>
+    </td>`;
+
+    employeeList.innerHTML = html;
+  } else {
+    const html = paginatedData
+      .map(
+        (employee) => `
     <tr>
       <td class="px-4 py-2 whitespace-nowrap">${employee.fullName}</td>
       <td class="px-4 py-2 whitespace-nowrap">${employee.department}</td>
@@ -168,10 +181,10 @@ function generateEmployeeList(employees) {
       </td>
     </tr>
   `
-    )
-    .join('');
-
-  employeeList.innerHTML = html;
+      )
+      .join('');
+    employeeList.innerHTML = html;
+  }
 
   // Add pagination controls
   addPaginationControls(employees);
@@ -261,7 +274,7 @@ document.body.addEventListener('click', (e) => {
 // Function to close the modal
 function closeEditModal() {
   const editModal = document.querySelector('#editModal');
-
+  user = null;
   editModal.classList.add('hidden');
   editModal.classList.remove('flex');
 }
@@ -282,17 +295,63 @@ function updateUserData(updatedUser) {
 
 const deleteUserButton = document.querySelector('#deleteUserButton');
 
-deleteUserButton.addEventListener('click', (e) => {
-  e.preventDefault();
+deleteUserButton.addEventListener('click', async (e) => {
+  e.preventDefault(); // Prevent the default behavior
 
-  deleteUser();
-});
-
-function deleteUser() {
   try {
-    fetchUsers.delete('employees', user.id);
+    console.log(user.id);
+    await fetchUsers.delete('employees', user.id);
+    updateDataAfterDelete(user);
+    closeEditModal();
   } catch (error) {
     console.error('Error deleting user:', error.message);
+  }
+});
+
+const deletedUserNameElement = document.querySelector('#deletedUserName');
+let deletedUserName = null;
+
+// Load the deleted user's information from localStorage when the page loads
+deletedUserName = localStorage.getItem('deletedUserName');
+
+// Display the deleted user's name if available
+displayDeletedUserName();
+
+setTimeout(() => {
+  localStorage.removeItem('deletedUserName'); // Clear the stored name
+}, 2000);
+
+function updateDataAfterDelete(deletedUser) {
+  // Find the index of the user in the data array
+  const userIndex = data.findIndex((user) => user.id === deletedUser.id);
+  if (userIndex !== -1) {
+    // Store the deleted user's name in localStorage
+    deletedUserName = data[userIndex].fullName;
+    localStorage.setItem('deletedUserName', deletedUserName);
+
+    // Remove the user from the data array
+    data.splice(userIndex, 1);
+    console.log('User deleted:', deletedUser);
+
+    // Display the deleted user's name on the page for 1000ms
+    setTimeout(() => {
+      deletedUserName = null;
+    }, 2500);
+  } else {
+    console.error('User not found for deletion in data array.');
+  }
+}
+
+// Add a function to display the deleted user's name
+function displayDeletedUserName() {
+  if (deletedUserName) {
+    deletedUserNameElement.textContent = `Candidate "${deletedUserName}" deleted`;
+    deletedUserNameElement.classList.remove('hidden');
+    // Remove the message after 1000ms
+    setTimeout(() => {
+      deletedUserNameElement.textContent = '';
+      deletedUserNameElement.classList.add('hidden');
+    }, 2500);
   }
 }
 

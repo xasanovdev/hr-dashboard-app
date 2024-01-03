@@ -26,6 +26,18 @@ const addEmployeeButton = document.getElementById('addEmployeeButton');
 
 addEmployeeButton.addEventListener('click', createNewEmployee);
 
+const addedUserNameElement = document.querySelector('#addedUserName');
+let addedUserName = null;
+
+addedUserName = localStorage.getItem('addedUserName');
+
+// Display the added user's name if available
+displayAddedUserName();
+
+setTimeout(() => {
+  localStorage.removeItem('addedUserName'); // Clear the stored name
+}, 2000);
+
 async function createNewEmployee(e) {
   e.preventDefault();
 
@@ -86,6 +98,13 @@ async function createNewEmployee(e) {
       throw new Error(`Error creating new employee: ${response.statusText}`);
     }
 
+    // Store the added user's name in localStorage
+    addedUserName = newEmployee.fullName;
+    localStorage.setItem('addedUserName', addedUserName);
+
+    // Display the added user's name
+    displayAddedUserName();
+
     // Reset form fields after successful creation
     document.getElementById('fullName').value = '';
     document.getElementById('position').value = '';
@@ -96,5 +115,20 @@ async function createNewEmployee(e) {
     // Optionally, you can fetch and render the updated employee list here
   } catch (error) {
     console.error('Error:', error);
+  }
+}
+
+// Add a function to display the added user's name
+function displayAddedUserName() {
+  if (addedUserName) {
+
+    addedUserNameElement.textContent = `Candidate "${deletedUserName}" added`;
+
+    addedUserNameElement.classList.remove('hidden');
+    // Display the added user's name on the page for 1000ms
+    setTimeout(() => {
+      addedUserName = null;
+      addedUserNameElement.classList.add('hidden');
+    }, 2000);
   }
 }
