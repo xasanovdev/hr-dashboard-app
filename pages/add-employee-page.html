@@ -11,6 +11,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -49,6 +51,12 @@
           </nav>
           <div class="relative">
             <i class="fa-solid fa-gear settings"></i>
+            <a
+              href="../index.html"
+              class="settingsContent absolute opacity-0 pointer-events-none -right-16 hover:text-red-600 rotate-45 bg-zinc-900 p-4 -top-4 duration-200 rounded-md shadow-lg"
+            >
+              <p class="-rotate-45">Exit</p>
+            </a>
           </div>
         </header>
 
@@ -185,5 +193,9 @@
     ></p>
 
     <script src="../js/employeeAdd.js"></script>
+
+    <script src="../index.js"></script>
+
+    <script src="../utils/settings.js"></script>
   </body>
 </html>

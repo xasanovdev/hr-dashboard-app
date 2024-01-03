@@ -23,7 +23,7 @@
     <div class="w-full h-full overflow-y-hidden">
       <div class="h-full w-full flex items-center">
         <header
-          class="w-[50px] h-full p-4 bg-black text-white flex items-center justify-between flex-col"
+          class="w-[50px] h-full px-4 py-8 bg-black text-white flex items-center justify-between flex-col"
         >
           <div>
             <a href="./dashboard-page.html"
@@ -49,6 +49,12 @@
           </nav>
           <div class="relative">
             <i class="fa-solid fa-gear settings"></i>
+            <a
+              href="../index.html"
+              class="settingsContent absolute opacity-0 pointer-events-none -right-16 hover:text-red-600 rotate-45 bg-zinc-900 p-4 -top-4 duration-200 rounded-md shadow-lg"
+            >
+              <p class="-rotate-45">Exit</p>
+            </a>
           </div>
         </header>
         <main class="p-4 flex-1 h-full overflow-y-auto">
@@ -65,8 +71,13 @@
 
               <div>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12">
-                  <div class="h-[300px] hidden self-center items-center justify-center md:flex">
-                    <canvas id="genderChart" class="self-center items-center"></canvas>
+                  <div
+                    class="h-[300px] hidden self-center items-center justify-center md:flex"
+                  >
+                    <canvas
+                      id="genderChart"
+                      class="self-center items-center"
+                    ></canvas>
                   </div>
                   <a
                     href="./employee-list-page.html"
@@ -99,7 +110,9 @@
                     </p>
                   </a>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
+                <div
+                  class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
+                >
                   <a
                     href="./employee-list-page.html"
                     class="relative bg-black flex overflow-hidden flex-col h-[300px] justify-between items-start p-4 rounded-3xl bg-gradient-to-r from-zinc-950 to-zinc-600"
@@ -155,5 +168,6 @@
 
     <script type="module" src="../index.js"></script>
     <script type="module" src="../utils/utils.js"></script>
+    <script src="../utils/settings.js"></script>
   </body>
 </html>

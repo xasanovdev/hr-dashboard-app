@@ -90,3 +90,11 @@ input[type='radio']:checked {
     transform: rotate(360deg);
   }
 }
+.settingsContent.active {
+  /* opacity-0 pointer-events-none -right-20 */
+  opacity: 1;
+  pointer-events: all;
+  z-index: 999;
+  right: -80px;
+  transition: 0.2s ease-in-out;
+}

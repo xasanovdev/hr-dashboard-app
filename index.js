@@ -35,15 +35,7 @@ const fetchUsers = {
   },
 };
 
-export default fetchUsers;
 
-const settingsIcon = document.querySelector('.settings');
-const settingsModal = document.querySelector('.settings-modal');
-
-settingsIcon.addEventListener('click', () => {
-  // Show settings modal
-  settingsModal.classList.toggle('hidden');
-});
 
 // Your data
 const data = await fetchUsers.get('employees');

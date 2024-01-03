@@ -49,6 +49,9 @@
           </nav>
           <div class="relative">
             <i class="fa-solid fa-gear settings"></i>
+            <a href="../index.html" class="settingsContent absolute opacity-0 pointer-events-none -right-16 hover:text-red-600 rotate-45 bg-zinc-900 p-4 -top-4 duration-200 rounded-md shadow-lg">
+              <p class="-rotate-45"> Exit</p>
+            </a>
           </div>
         </header>
         <main class="p-4 flex-1 h-full overflow-y-auto">
@@ -329,7 +332,8 @@
 
       <p class="absolute font-bold text-lg text-red-500 bg-amber-50 py-2 px-4 shadow-xl border-b-2 border-red-500 right-4 bottom-4 hidden" id="deletedUserName"></p>
 
-    <script async type="module" src="/utils/utils.js"></script>
-    <script async type="module" src="../js/employeeList.js"></script>
+    <script type="module" src="/utils/utils.js"></script>
+    <script type="module" src="../js/employeeList.js"></script>
+    <script src="../utils/settings.js"></script>
   </body>
 </html>
